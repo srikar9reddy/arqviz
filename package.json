@@ -3,12 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/firestore": "^4.7.1",
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.17.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "firebase": "^10.13.1",
+    "framer-motion": "^11.5.4",
+    "init": "^0.1.2",
+    "lucide-react": "^0.441.0",
+    "npx": "^10.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.26.2",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.1.13",
+    "three": "^0.168.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11"
   }
 }
