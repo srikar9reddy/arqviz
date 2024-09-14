@@ -37,10 +37,11 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black p-8">
+    <div className="min-h-screen bg-white text-black py-12">
         <section className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end w-full">
           <div className="mb-4 md:mb-0">
-            <h1 className="text-2xl leading-tight mb-2">Your Designs,
+            <h1 className="text-2xl leading-tight mb-2">
+              Your Designs,
               Rendered to Perfection
             </h1>
             <p className="text-sm">

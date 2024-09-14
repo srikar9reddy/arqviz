@@ -6,7 +6,7 @@ const AboutPage = () => {
     <div className="min-h-screen bg-white text-black p-8 flex flex-col">
         <Header />
 
-      <main className="flex-grow flex flex-col md:flex-row gap-12">
+      <main className="flex-grow flex flex-col md:flex-row gap-12 mt-12">
         <section className="md:w-1/2">
           <h1 className="text-3xl font-light mb-6">Our Story</h1>
           <p className="text-sm leading-relaxed mb-6">

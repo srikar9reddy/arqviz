@@ -57,7 +57,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="flex justify-between items-center py-4 px-4 fixed top-0 left-0 right-0 bg-white z-50"
+      className="flex justify-between items-center py-4 px-8 fixed top-0 left-0 right-0 z-50 bg-white"
       initial={{ y: 0 }}
       animate={controls}
     >

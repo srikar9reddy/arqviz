@@ -44,7 +44,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-white text-black p-4 sm:p-8">
         <Header />
 
-      <main className="flex flex-col md:flex-row gap-12">
+      <main className="flex flex-col md:flex-row gap-12 mt-12">
         <motion.section 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
