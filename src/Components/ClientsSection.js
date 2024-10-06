@@ -43,7 +43,7 @@ const ClientsSection = () => {
       className='w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden p-16'
     >
       <h2 className='text-4xl md:text-6xl font-light mb-24 text-center'>
-        Trusted by <span className="font-serif italic">industry leaders</span>
+        Our <span className="font-serif italic">valued clients</span>
       </h2>
       <div 
         ref={clientsRef} 

@@ -84,9 +84,9 @@ export default function HeroSection() {
               />
             ))}
           </div>
-          <span>Our renderings don't just </span>
-          <span className='font-serif italic'>illustrate</span>
-          <span>—they </span>
+          <span>Renders that </span>
+          <span className='font-serif italic'>inspire</span>
+          <span>—</span>
           <span className='font-serif italic'>ignite imaginations</span>
           <span>.</span>
         </h1>
