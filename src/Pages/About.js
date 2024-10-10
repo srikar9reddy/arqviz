@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { motion, AnimatePresence } from 'framer-motion'
+import ServicesSection from '../Components/ServicesSection'
 
 const AboutPage = () => {
   const faqs = [
@@ -22,37 +23,11 @@ const AboutPage = () => {
     <div className="min-h-screen bg-white text-black flex flex-col">
       <Header />
 
-      <main className="flex-grow flex flex-col gap-40 mt-40 px-8 md:px-24 lg:px-32">
-        <motion.section 
-          className="flex flex-col md:flex-row gap-24 items-center"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="md:w-1/2 flex flex-col justify-center">
-            <h1 className="text-4xl md:text-5xl font-light mb-16">Our Story</h1>
-            <p className="text-lg leading-relaxed mb-10">
-              We started Arqviz in 2020, combining my love fvor aesthetics and years of experience in UX design. Though I dropped out of architecture school, my passion for design never left, and with my father and sister—both architects—we started by creating simple interior renders for clients.
-            </p>
-            <p className="text-lg leading-relaxed mb-10">
-              What began as small projects for friends has grown into a team working on both large and small-scale architectural visualization. We focus on bringing designs to life, helping clients visualize their ideas with clarity and impact.
-            </p>
-            <p className="text-lg leading-relaxed">
-              At Arqviz, we don’t just make visuals—we tell the story of your space.
-            </p>
-          </div>
-
-          <div className="md:w-1/2">
-            <img 
-              src="https://i.imgur.com/ocL3eLv.png" 
-              alt="3D visualization studio" 
-              className="w-full h-auto object-cover rounded-sm "
-            />
-          </div>
-        </motion.section>
+      <main className="flex-grow flex flex-col gap-40 mt-20">
+        <ServicesSection />
 
         <motion.section 
-          className="mt-40"
+          className="mt-40 md:max-w-2xl md:mx-auto px-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}

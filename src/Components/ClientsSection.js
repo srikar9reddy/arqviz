@@ -40,17 +40,17 @@ const ClientsSection = () => {
   return (
     <motion.div 
       ref={sectionRef}
-      className='w-full min-h-screen flex flex-col justify-center items-center relative overflow-hidden p-16'
+      className='w-full flex flex-col justify-center items-center relative overflow-hidden p-8 md:p-16'
     >
-      <h2 className='text-4xl md:text-6xl font-light mb-24 text-center'>
-        Our <span className="font-serif italic">valued clients</span>
+      <h2 className='text-4xl md:text-5xl font-light mb-16 text-center'>
+        We <span className="font-serif italic">worked with</span>
       </h2>
       <div 
         ref={clientsRef} 
-        className="grid grid-cols-2 md:grid-cols-3 gap-16 items-center justify-items-center"
+        className="grid grid-cols-3 md:grid-cols-6 gap-4 items-center justify-items-center"
       >
         {clients.map((client, index) => (
-          <div key={index} className="w-32 h-32 flex items-center justify-center">
+          <div key={index} className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
             <img 
               src={client.logo} 
               alt={client.name} 

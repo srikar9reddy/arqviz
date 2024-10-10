@@ -27,11 +27,11 @@ const Header = () => {
           const scrollDifference = Math.abs(currentScrollY - lastScrollY);
           
           if (scrollDifference > 5) {  // Add a threshold to reduce sensitivity
-            if (currentScrollY > lastScrollY) {
-              // Scrolling down
+            if (currentScrollY > lastScrollY && currentScrollY > 0) {
+              // Scrolling down and not at the top
               controls.start({ y: '-100%', transition: { duration: 0.1, ease: 'linear' } });
             } else {
-              // Scrolling up
+              // Scrolling up or at the top
               controls.start({ y: 0, transition: { duration: 0.1, ease: 'linear' } });
             }
             lastScrollY = currentScrollY;

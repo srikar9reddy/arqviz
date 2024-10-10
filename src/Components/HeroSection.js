@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import { Link } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
@@ -69,7 +69,7 @@ export default function HeroSection() {
       style={{ opacity: heroOpacity }}
     >
       <div className='h-full w-full flex flex-col justify-center items-center bg-transparent text-black p-8 relative z-10'>
-        <h1 ref={textRef} className='hero-text text-center leading-none mb-4 mt-8 text-4xl md:text-6xl font-light max-w-2xl'>
+        <h1 ref={textRef} className='hero-text text-center leading-none mb-4 mt-8 text-5xl md:text-7xl font-light max-w-2xl'>
           {/* Slideshow */}
           <div className="w-full h-96 my-4 relative overflow-hidden rounded-sm">
             {slides.map((slide, index) => (
@@ -86,14 +86,12 @@ export default function HeroSection() {
           </div>
           <span>Renders that </span>
           <span className='font-serif italic'>inspire</span>
-          <span>—</span>
-          <span className='font-serif italic'>ignite imaginations</span>
-          <span>.</span>
+
         </h1>
 
         {/* Buttons */}
         <div className='hero-buttons flex justify-between w-full mt-8'>
-          <button className='text-black px-8 py-3 underline'>Learn More</button>
+          <Link to="/work" className='text-black px-8 py-3 underline'>Our Work</Link>
           <button className='text-black px-8 py-3' onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}>(Showreel '23-24)</button>
         </div>
       </div>
