@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import anime from 'animejs/lib/anime.es.js';
 
@@ -11,6 +10,23 @@ const Header = () => {
   const menuButtonRef = useRef(null);
   const overlayRef = useRef(null);
   const closeButtonRef = useRef(null);
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const yOffset = -80;
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
+    
+    if (isMenuOpen) {
+      toggleMenu();
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -108,7 +124,9 @@ const Header = () => {
         initial={{ y: 0 }}
         animate={controls}
       >
-        <div className="text-lg font-bold"><Link to="/">ARQVIZ</Link></div>
+        <div className="text-lg font-bold">
+          <button onClick={() => scrollToSection('home')}>ARQVIZ</button>
+        </div>
         <nav className="relative">
           {isMobile ? (
             <button
@@ -122,9 +140,15 @@ const Header = () => {
             </button>
           ) : (
             <ul className="flex space-x-6">
-              <li className='hover:underline transition duration-300'><Link to="/work">WORK</Link></li>
-              <li className='hover:underline transition duration-300'><Link to="/about">ABOUT</Link></li>
-              <li className='hover:underline transition duration-300'><Link to="/contact">CONTACT</Link></li>
+              <li className='hover:underline transition duration-300'>
+                <button onClick={() => scrollToSection('work')}>WORK</button>
+              </li>
+              <li className='hover:underline transition duration-300'>
+                <button onClick={() => scrollToSection('about')}>ABOUT</button>
+              </li>
+              <li className='hover:underline transition duration-300'>
+                <button onClick={() => scrollToSection('contact')}>CONTACT</button>
+              </li>
             </ul>
           )}
         </nav>
@@ -142,9 +166,15 @@ const Header = () => {
             &times;
           </button>
           <ul className="text-5xl space-y-12 text-center font-light">
-            <li className='hover:underline transition duration-300'><Link to="/work" onClick={toggleMenu}>WORK</Link></li>
-            <li className='hover:underline transition duration-300'><Link to="/about" onClick={toggleMenu}>ABOUT</Link></li>
-            <li className='hover:underline transition duration-300'><Link to="/contact" onClick={toggleMenu}>CONTACT</Link></li>
+            <li className='hover:underline transition duration-300'>
+              <button onClick={() => scrollToSection('work')}>WORK</button>
+            </li>
+            <li className='hover:underline transition duration-300'>
+              <button onClick={() => scrollToSection('about')}>ABOUT</button>
+            </li>
+            <li className='hover:underline transition duration-300'>
+              <button onClick={() => scrollToSection('contact')}>CONTACT</button>
+            </li>
           </ul>
         </div>
       )}

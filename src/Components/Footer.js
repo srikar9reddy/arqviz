@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-black text-white w-full mt-24 pt-12">
-      {/* CTA Section */}
+      {/* CTA Section
       {!isContactPage && (
         <div className="bg-black py-12 px-4 sm:px-6 lg:px-8 mb-12">
           <div className="max-w-4xl mx-auto text-center">
@@ -21,7 +21,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Footer Content */}
       <div className="container mx-auto px-4 py-8">

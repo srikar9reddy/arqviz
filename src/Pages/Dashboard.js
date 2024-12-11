@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, X, Plus } from 'lucide-react';
-import { db } from '../firebaseConfig';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { db, storage } from '../firebaseConfig';
+import { collection, addDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const ProjectCreationForm = () => {
@@ -68,17 +68,28 @@ const ProjectCreationForm = () => {
     setLoading(true);
     setSubmitMessage('');
 
-    // Validate that Firebase is properly initialized
-    if (!db) {
-      setSubmitMessage('Error: Firebase not properly initialized');
-      setLoading(false);
-      return;
-    }
+    // Debug logging
+    console.log('Submitting with Firebase config:', {
+      projectId: process.env.REACT_APP_PROJECT_ID,
+      dbInitialized: !!db,
+      storageInitialized: !!storage
+    });
 
     try {
-      // Validate required fields
+      // Verify Firebase is initialized
+      if (!db || !storage) {
+        throw new Error('Firebase services not properly initialized');
+      }
+
+      // Add more detailed error logging
       if (!name || !description || selectedCategories.length === 0) {
-        setSubmitMessage('Please fill in all required fields and select at least one category');
+        const missingFields = [];
+        if (!name) missingFields.push('name');
+        if (!description) missingFields.push('description');
+        if (selectedCategories.length === 0) missingFields.push('categories');
+        
+        console.log('Validation failed. Missing fields:', missingFields);
+        setSubmitMessage(`Please fill in all required fields: ${missingFields.join(', ')}`);
         setLoading(false);
         return;
       }
@@ -90,9 +101,10 @@ const ProjectCreationForm = () => {
         client,
         featureType,
         categories: selectedCategories,
-        createdAt: new Date(),
+        createdAt: serverTimestamp(),
       });
       const projectId = docRef.id;
+      console.log('Document created with ID:', projectId);
   
       // Upload images and other media files
       const imageUrls = await Promise.all(images.map((image) => uploadImage(image, projectId)));
@@ -134,7 +146,16 @@ const ProjectCreationForm = () => {
         setSubmitMessage('');
       }, 10000); // Dismiss after 10 seconds
     } catch (error) {
-      console.error('Error creating project:', error);
+      console.error('Submission error:', {
+        message: error.message,
+        code: error.code,
+        stack: error.stack,
+        config: {
+          projectId: process.env.REACT_APP_PROJECT_ID,
+          hasDb: !!db,
+          hasStorage: !!storage
+        }
+      });
       setSubmitMessage(`Error: ${error.message}`);
     } finally {
       setLoading(false);

@@ -38,7 +38,6 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen text-black bg-white">
-      <Header />
 
       <main className="container mx-auto px-4 py-32 md:py-24">
         <motion.div
@@ -173,7 +172,6 @@ const ContactPage = () => {
           </motion.section>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

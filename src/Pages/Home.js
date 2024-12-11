@@ -7,18 +7,31 @@ import ServicesSection from '../Components/ServicesSection';
 import ClientsSection from '../Components/ClientsSection';
 import WorkSlideShow from '../Components/WorkSlideshow'
 import WorkPage from './Work';
+import ContactPage from './Contact';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black">
       <Header />
       <main className='mt-0 space-y-32'>
-        <HeroSection />
-        <VideoSection />
-        <ServicesSection />
-        <WorkPage/>
-        <ClientsSection />
-
+        <section id="hero">
+          <HeroSection />
+        </section>
+        <section id="video">
+          <VideoSection />
+        </section>
+        <section id="about">
+          <ServicesSection />
+        </section>
+        <section id="work">
+          <WorkPage/>
+        </section>
+        {/* <section id="clients">
+          <ClientsSection />
+        </section> */}
+        <section id="contact">
+          <ContactPage/>
+        </section>
       </main>
       <Footer />
     </div>
