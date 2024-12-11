@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Header from '../Components/Header'
+
 import { Link } from 'react-router-dom'
-import Footer from '../Components/Footer'
+
 import { motion, AnimatePresence } from 'framer-motion'
 
 const WorkPage = () => {
@@ -26,11 +26,9 @@ const WorkPage = () => {
 
   return (  
     <div className="min-h-screen bg-white text-black">
-      <Header />
-
-      <main className='my-20 px-8'>
-        <h1 className="text-4xl md:text-6xl font-light mb-4 sm:mb-8 text-center">Our Work</h1>
-        <div className="mb-8 flex space-x-4 overflow-x-auto pr-4 scrollbar-hide md:justify-center">
+      <main className='my-20 px-10 md:px-20'>
+        <h2 className="text-2xl md:text-4xl font-medium mb-4 sm:mb-8 text-left">Our Portfolio</h2>
+        <div className="mb-8 flex space-x-4 overflow-x-auto pr-4 scrollbar-hide ">
           <style jsx>{`
             ::-webkit-scrollbar {
               display: none;
@@ -72,7 +70,7 @@ const WorkPage = () => {
                       alt={work.title}
                       className="w-full h-64 sm:h-80 object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                    <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                       <h3 className="text-xl font-light mb-1 text-white">{work.title}</h3>
                       <p className="text-sm text-gray-300">{work.category.charAt(0).toUpperCase() + work.category.slice(1)} | {work.year}</p>
                     </div>
@@ -83,8 +81,6 @@ const WorkPage = () => {
           </motion.div>
         </AnimatePresence>
       </main>
-
-      <Footer />
     </div>
   )
 }

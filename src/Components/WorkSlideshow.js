@@ -12,7 +12,7 @@ const images = [
 
 
 
-export default function Home() {
+export default function WorkSlideShow() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const scrollRef = useRef(null);
 
@@ -37,16 +37,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black py-12">
+    <div className="min-h-screen w-full bg-white text-black p-10 md:px-20">
         <section className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end w-full">
           <div className="mb-4 md:mb-0">
-            <h1 className="text-2xl leading-tight mb-2">
+            <h2 className="ext-2xl md:text-4xl font-medium leading-tight ">
               Your Designs,
               Rendered to Perfection
-            </h1>
-            <p className="text-sm">
-            Redefining 3D rendering with breathtaking visualizations—crafted for designers, architects, and builders.
-            </p>
+            </h2>
           </div>
         </section>
         <section className="relative">
@@ -54,7 +51,7 @@ export default function Home() {
             <motion.img
               src={images[currentImageIndex]}
               alt="Featured artwork"
-              className="w-full h-[60vh] object-cover"
+              className="w-full h-[60vh] object-cover rounded-lg"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
@@ -62,15 +59,15 @@ export default function Home() {
           </div>
           <div 
             ref={scrollRef}
-            className="flex space-x-4 overflow-x-auto scrollbar-hide"
+            className="flex space-x-2 overflow-x-auto scrollbar-hide"
           >
             {images.map((src, index) => (
               <img
                 key={index}
                 src={src}
                 alt={`Artwork ${index + 1}`}
-                className={`w-32 h-40 object-cover cursor-pointer ${
-                  index === currentImageIndex ? 'border-2 border-black' : ''
+                className={`w-32 h-40 object-cover cursor-pointer rounded-lg ${
+                  index === currentImageIndex ? 'border-2 border-white' : ''
                 }`}
                 onClick={() => handleThumbnailClick(index)}
               />

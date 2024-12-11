@@ -17,7 +17,12 @@ const ProjectCreationForm = () => {
     const [thumbnail, setThumbnail] = useState(null);
     const [loading, setLoading] = useState(false);
     const [submitMessage, setSubmitMessage] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
+    // Add the predefined categories
+    const categoryOptions = ['Interior', 'Exterior', 'Commercial', 'Residential'];
+
+    
   const handleImageUpload = (e) => {
     const newImages = Array.from(e.target.files);
     setImages([...images, ...newImages]);
@@ -62,14 +67,29 @@ const ProjectCreationForm = () => {
     e.preventDefault();
     setLoading(true);
     setSubmitMessage('');
-  
+
+    // Validate that Firebase is properly initialized
+    if (!db) {
+      setSubmitMessage('Error: Firebase not properly initialized');
+      setLoading(false);
+      return;
+    }
+
     try {
+      // Validate required fields
+      if (!name || !description || selectedCategories.length === 0) {
+        setSubmitMessage('Please fill in all required fields and select at least one category');
+        setLoading(false);
+        return;
+      }
+
       // Create a new document in Firestore with initial data
       const docRef = await addDoc(collection(db, 'projects'), {
         name,
         description,
         client,
         featureType,
+        categories: selectedCategories,
         createdAt: new Date(),
       });
       const projectId = docRef.id;
@@ -107,6 +127,7 @@ const ProjectCreationForm = () => {
       setFeatureImage(null);
       setFeatureVideo('');
       setThumbnail(null);
+      setSelectedCategories([]);
   
       setSubmitMessage('Project created successfully!');
       setTimeout(() => {
@@ -114,13 +135,26 @@ const ProjectCreationForm = () => {
       }, 10000); // Dismiss after 10 seconds
     } catch (error) {
       console.error('Error creating project:', error);
-      setSubmitMessage('An error occurred while creating the project. Please try again.');
-      setTimeout(() => {
-        setSubmitMessage('');
-      }, 10000); // Dismiss after 10 seconds
+      setSubmitMessage(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
+  };
+
+  const addCategory = () => {
+    setSelectedCategories([...selectedCategories, '']);
+  };
+
+  const updateCategory = (index, value) => {
+    const newCategories = [...selectedCategories];
+    newCategories[index] = value;
+    setSelectedCategories(newCategories);
+  };
+
+  const removeCategory = (index) => {
+    const newCategories = [...selectedCategories];
+    newCategories.splice(index, 1);
+    setSelectedCategories(newCategories);
   };
 
   return (
@@ -324,6 +358,37 @@ const ProjectCreationForm = () => {
               accept="image/*"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
+          </div>
+          {/* Categories Multi-select */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Categories
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {categoryOptions.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategories(prev => 
+                      prev.includes(category)
+                        ? prev.filter(c => c !== category)
+                        : [...prev, category]
+                    );
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                    selectedCategories.includes(category)
+                      ? 'bg-gray-700 text-white'
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            {selectedCategories.length === 0 && (
+              <p className="mt-2 text-sm text-red-500">Please select at least one category</p>
+            )}
           </div>
           {/* Submit Button */}
           <div className="flex items-center justify-between">

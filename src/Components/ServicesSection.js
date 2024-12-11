@@ -58,28 +58,54 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="bg-white p-8 md:p-16 w-full font-sans">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between gap-12">
-          <h2 ref={subtitleRef} className="text-2xl md:text-3xl font-medium mb-6 leading-tight md:max-w-md">
-            Turn your ideas into awe-inspiring visual narratives that command attention and drive action.
-          </h2>
-
-          <div ref={textRef} className="flex flex-col">
-            <p className="text-md mb-12 leading-relaxed md:max-w-md">
-              At Arqviz, we don't just create visuals; we craft bespoke aesthetics tailored to each project's needs. We empathize deeply with the end user, ensuring that every interactive experience and visualization we create resonates on a profound level. By understanding the nuances of human perception and behavior, we transform architectural concepts into compelling visual narratives that not only showcase spaces but also evoke emotions and inspire action.
-            </p>
-
-            <p className="text-sm font-semibold mb-8">Our Holistic Approach</p>
-
-            <div ref={linksRef} className="space-y-4">
-              <a href="#" className="block text-sm underline">Discover Our User-Centric Design Process</a>
-              <a href="#" className="block text-sm underline">Explore Our Psychological Approach to Visualization</a>
-              <a href="#" className="block text-sm underline">See How We Tailor Aesthetics to Your Project</a>
-            </div>
+    <div ref={sectionRef} className="bg-white p-10 md:p-20 w-full font-sans">
+    <div className=" mx-auto">
+      <div className="flex flex-col md:flex-row justify-between gap-12">
+        <h2 ref={subtitleRef} className="text-2xl md:text-4xl font-medium mb-6 leading-tight md:max-w-lg">
+        Elevate Your Designs with Breathtaking 3D Visualizations That Inspire and Impress</h2>
+        
+        <div ref={textRef} className="flex flex-col">
+          <p className="text-md mb-12 leading-relaxed md:max-w-md">
+          At Arqviz, we turn architectural concepts into show-stopping 3D visualizations that captivate and convert. Using advanced rendering techniques and a deep understanding of user-centric design, we deliver visuals that go beyond aesthetics—they tell a story. From photorealistic interiors to immersive walkthroughs, our tailored 3D solutions are crafted to evoke emotions, showcase your vision, and make a lasting impact.
+          </p>
+  
+          <p className="text-md font-semibold mb-4">Services</p>
+          <div ref={linksRef} className="space-y-4">
+            <a href="#" className="block text-md underline">
+            Architectural Rendering
+            </a>
+            <a href="#" className="block text-md underline">
+            3D Floor Plans
+            </a>
+            <a href="#" className="block text-md underline">
+            Virtual Reality (VR) Walkthroughs
+            </a>
+            <a href="#" className="block text-md underline">
+            Augmented Reality (AR) Integration
+            </a>
+            <a href="#" className="block text-md underline">
+            Animation and Flythroughs
+            </a>
+            <a href="#" className="block text-md underline">
+            Interior Styling and Visualization
+            </a>
+            <a href="#" className="block text-md underline">
+            Product Visualization
+            </a>
+            <a href="#" className="block text-md underline">
+            Marketing Collateral Design
+            </a>
+            <a href="#" className="block text-md underline">
+            Urban Design and Masterplanning Visualization
+            </a>
+            <button onClick={() => window.location.href = '/contact'} className='px-6 py-2 outline rounded-md hover:bg-black hover:text-white'>
+              Get a quotation
+            </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  
   );
 }

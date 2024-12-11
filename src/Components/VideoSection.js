@@ -45,14 +45,14 @@ export default function VideoSection() {
   return (
     <motion.div 
       ref={containerRef}
-      className='w-full flex justify-center items-center relative overflow-hidden p-8 md:px-16 mt-12 '
+      className='w-full flex justify-center items-center relative overflow-hidden p-8 md:px-16 mt-12'
       style={{ scale: videoScale }}
     >
       <div className='relative w-full'>
         <video 
           ref={videoRef}
-          className='w-full h-[80vh] object-cover' 
-          src="https://firebasestorage.googleapis.com/v0/b/arqviz-inc.appspot.com/o/sample%2Fsample-video.mp4?alt=media&token=9056876e-9201-49d2-bccb-3369cda628df" 
+          className='w-full h-[80vh] object-cover rounded-lg' 
+          src="https://firebasestorage.googleapis.com/v0/b/arqviz-inc.appspot.com/o/videos%2FSancha-Low-res.mp4?alt=media&token=6b288f69-ca8e-460b-8789-0991266a25bf" 
           loop 
           muted 
         />

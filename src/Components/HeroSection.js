@@ -28,7 +28,7 @@ export default function HeroSection() {
       // Fade in the initial slide
       tl.from('.slideshow-image', {
         opacity: 0,
-        duration: 1.5,
+        duration: 1,
         ease: 'power2.out',
       });
 
@@ -68,31 +68,31 @@ export default function HeroSection() {
       className='min-h-[100vh] w-full flex justify-between items-center relative overflow-hidden'
       style={{ opacity: heroOpacity }}
     >
-      <div className='h-full w-full flex flex-col justify-center items-center bg-transparent text-black p-8 relative z-10'>
-        <h1 ref={textRef} className='hero-text text-center leading-none mb-4 mt-8 text-5xl md:text-7xl font-light max-w-2xl'>
+      <div className='h-full w-full flex flex-col justify-center items-center bg-transparent text-black relative z-10'>
+        <h1 ref={textRef} className='hero-text text-center leading-tight tracking-tight mb-4 mt-8 max-w-4xl mx-auto'>
           {/* Slideshow */}
-          <div className="w-full h-96 my-4 relative overflow-hidden rounded-sm">
+          <div className="w-full h-[60vh] my-8 relative overflow-hidden rounded-lg shadow-2xl">
             {slides.map((slide, index) => (
               <motion.img
                 key={index}
                 src={slide}
                 alt={`Slide ${index + 1}`}
-                className={`slideshow-image w-full h-full object-cover absolute top-0 left-0`}
+                className={`slideshow-image w-full h-full object-cover absolute top-0`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: index === currentSlide ? 1 : 0 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
               />
             ))}
           </div>
-          <span>Renders that </span>
-          <span className='font-serif italic'>inspire</span>
-
+          {/* <span className='font-serif italic text-3xl md:text-4xl block mb-2 text-gray-800'>The</span> */}
+          <span className='text-4xl md:text-5xl font-medium block mb-2 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>Advanced 3D Modelling & Rendering</span>
+          <span className='font-serif italic text-2xl font-light md:text-4xl block text-gray-800'>For Architects & Developers </span>
         </h1>
 
         {/* Buttons */}
         <div className='hero-buttons flex justify-between w-full mt-8'>
-          <Link to="/work" className='text-black px-8 py-3 underline'>Our Work</Link>
-          <button className='text-black px-8 py-3' onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}>(Showreel '23-24)</button>
+          <Link to="/work" className='text-black px-10 md:px-20 py-3 underline'>View Portfolio</Link>
+          <Link to="/work" className='text-black px-10 md:px-20 py-3 underline'>Get Quote</Link>
         </div>
       </div>
     </motion.div>

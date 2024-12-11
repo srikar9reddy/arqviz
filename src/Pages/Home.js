@@ -5,6 +5,8 @@ import HeroSection from '../Components/HeroSection';
 import VideoSection from '../Components/VideoSection';
 import ServicesSection from '../Components/ServicesSection';
 import ClientsSection from '../Components/ClientsSection';
+import WorkSlideShow from '../Components/WorkSlideshow'
+import WorkPage from './Work';
 
 export default function Home() {
   return (
@@ -14,7 +16,9 @@ export default function Home() {
         <HeroSection />
         <VideoSection />
         <ServicesSection />
+        <WorkPage/>
         <ClientsSection />
+
       </main>
       <Footer />
     </div>
