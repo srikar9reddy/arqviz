@@ -5,22 +5,17 @@ export default function VideoSection() {
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const isInView = useInView(containerRef, { amount: 0.3 });
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const videoScale = useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1]);
 
-  useEffect(() => {
-    if (isInView && videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    } else if (!isInView && videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  }, [isInView]);
-
   const togglePlay = () => {
+    if (!isVideoLoaded) {
+      setIsVideoLoaded(true);
+      videoRef.current.load();
+    }
+    
     if (videoRef.current.paused) {
       videoRef.current.play();
       setIsPlaying(true);
@@ -49,13 +44,23 @@ export default function VideoSection() {
       style={{ scale: videoScale }}
     >
       <div className='relative w-full'>
+        {!isVideoLoaded ? (
+          <img 
+            src="https://firebasestorage.googleapis.com/v0/b/arqviz-inc.appspot.com/o/i61MAzTzEDLnOjSUQuiQ%2Fimages%2FSancha-9000.png?alt=media&token=59f91e61-a01d-403c-8ed8-e9d4dcb896d2" // Replace with your thumbnail image path
+            className='w-full h-[80vh] object-cover rounded-sm'
+            alt="Video thumbnail"
+          />
+        ) : null}
         <video 
           ref={videoRef}
-          className='w-full h-[80vh] object-cover rounded-lg' 
-          src="https://firebasestorage.googleapis.com/v0/b/arqviz-inc.appspot.com/o/videos%2FSancha-Low-res.mp4?alt=media&token=6b288f69-ca8e-460b-8789-0991266a25bf" 
+          className='w-full h-[80vh] object-cover rounded-sm' 
+          style={{ display: isVideoLoaded ? 'block' : 'none' }}
+          preload="none"
           loop 
           muted 
-        />
+        >
+          <source src="https://firebasestorage.googleapis.com/v0/b/arqviz-inc.appspot.com/o/videos%2FSancha-Low-res.mp4?alt=media&token=6b288f69-ca8e-460b-8789-0991266a25bf" type="video/mp4" />
+        </video>
         <div className='absolute bottom-4 right-4 flex space-x-3'>
           <button 
             onClick={togglePlay}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import anime from 'animejs/lib/anime.es.js';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,17 +11,36 @@ const Header = () => {
   const menuButtonRef = useRef(null);
   const overlayRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const yOffset = -80;
-      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth'
-      });
+    if (location.pathname !== '/') {
+      // If we're not on the home page, navigate to home first
+      navigate('/');
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const yOffset = -80;
+          const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({
+            top: y,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      // If we're already on the home page, just scroll
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const yOffset = -80;
+        const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        });
+      }
     }
     
     if (isMenuOpen) {
@@ -125,7 +145,7 @@ const Header = () => {
         animate={controls}
       >
         <div className="text-lg font-bold">
-          <button onClick={() => scrollToSection('home')}>ARQVIZ</button>
+          <button onClick={() => scrollToSection('hero')}>ARQVIZ</button>
         </div>
         <nav className="relative">
           {isMobile ? (

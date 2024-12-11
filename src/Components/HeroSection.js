@@ -62,6 +62,13 @@ export default function HeroSection() {
     };
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.div 
       ref={heroRef}
@@ -71,7 +78,7 @@ export default function HeroSection() {
       <div className='h-full w-full flex flex-col justify-center items-center bg-transparent text-black relative z-10'>
         <h1 ref={textRef} className='hero-text text-center leading-tight tracking-tight mb-4 mt-8 max-w-4xl mx-auto'>
           {/* Slideshow */}
-          <div className="w-full h-[60vh] my-8 relative overflow-hidden rounded-lg shadow-2xl">
+          <div className="w-full h-[60vh] my-8 relative overflow-hidden rounded-sm shadow-2xl">
             {slides.map((slide, index) => (
               <motion.img
                 key={index}
@@ -91,8 +98,8 @@ export default function HeroSection() {
 
         {/* Buttons */}
         <div className='hero-buttons flex justify-between w-full mt-8'>
-          <Link to="/work" className='text-black px-10 md:px-20 py-3 underline'>View Portfolio</Link>
-          <Link to="/work" className='text-black px-10 md:px-20 py-3 underline'>Get Quote</Link>
+          <button onClick={() => scrollToSection('work')} className='text-black px-10 md:px-20 py-3 underline'>View Portfolio</button>
+          <button onClick={() => scrollToSection('contact')} className='text-black px-10 md:px-20 py-3 underline'>Get Quote</button>
         </div>
       </div>
     </motion.div>

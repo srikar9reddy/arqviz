@@ -169,7 +169,7 @@ const ProjectDetails = () => {
           <img
             src={project.featureImage}
             alt={project.title}
-            className="w-full max-h-[80vh] object-cover rounded-lg"
+            className="w-full max-h-[80vh] object-cover rounded-sm"
           />
         </motion.div>
 
@@ -200,7 +200,7 @@ const ProjectDetails = () => {
               key={index}
               whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
               whileTap={{ scale: 0.97 }}
-              className="cursor-pointer relative group overflow-hidden rounded-xl shadow-lg"
+              className="cursor-pointer relative group overflow-hidden rounded-sm shadow-lg"
               onClick={() => openLightbox(index)}
             >
               <img
@@ -266,7 +266,7 @@ const ProjectDetails = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-12 flex justify-between"
+        className="mt-12 flex justify-between p-10 md:p-20"
       >
         <a href="/projects/previous" className="text-gray-600 hover:text-black transition-colors duration-300">
           ← Previous Project

@@ -103,7 +103,7 @@ const WorkPage = () => {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.5 }}
               >
-                <Link to={`/project/${work.id}`} className="bg-white rounded-sm overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out block">
+                <Link to={`/project/${work.id}`} className="bg-white rounded-sm overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out block ">
                   <div className="relative overflow-hidden group">
                     <img 
                       src={work.image}

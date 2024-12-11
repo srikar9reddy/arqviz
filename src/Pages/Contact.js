@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Send } from 'lucide-react'
-import Header from '../Components/Header'
 import '../Assets/instagram.png'
 import '../Assets/youtube.png'
-import Footer from '../Components/Footer'
+
 
 const ContactPage = () => {
   const [name, setName] = useState('')
@@ -39,18 +38,14 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen text-black bg-white">
 
-      <main className="container mx-auto px-4 py-32 md:py-24">
+      <main className="container mx-auto p-10 md:p-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Let's Create Together</h1>
-          <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Bringing Architectural Visions to Life</h2>
-          <p className="text-base text-gray-600 max-w-xl mx-auto">
-            At ARQVIZ, we specialize in showcasing your projects with stunning visuals. Ready to elevate your designs? Let's start a conversation.
-          </p>
+          <h2 className="text-xl md:text-4xl font-semibold text-black mb-4">Let's collaborate</h2>
         </motion.div>
 
         <div className="flex flex-col md:flex-row gap-12">
@@ -60,7 +55,7 @@ const ContactPage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="md:w-1/2 bg-white p-8 rounded-lg border border-gray-300"
           >
-            <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
+            <h2 className="text-lg font-bold mb-6">Get in Touch</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -100,7 +95,7 @@ const ContactPage = () => {
                 whileTap={{ scale: 0.95 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-black text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center text-lg font-semibold"
+                className="w-full bg-black text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center text-md font-semibold"
               >
                 {isSubmitting ? (
                   <motion.div
@@ -132,39 +127,39 @@ const ContactPage = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="md:w-1/2 bg-white p-8 rounded-lg border border-gray-300"
           >
-            <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+            <h2 className="text-lg font-bold mb-6">Contact Information</h2>
             <div className="space-y-6">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-4"
               >
                 <MapPin className="w-6 h-6 text-black" />
-                <p className="text-lg">B1, Oakwood Apts, Banjara Hills, Hyderabad, India</p>
+                <p className="text-md">Cokarma, Mahaveer Radiance, Jubilee Hills 36, Hyderabad, India</p>
               </motion.div>
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-4"
               >
                 <Phone className="w-6 h-6 text-black" />
-                <p className="text-lg">+91 7659000258</p>
+                <p className="text-md">+91 7659000258</p>
               </motion.div>
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-4"
               >
-                <Mail className="w-6 h-6 text-black" />
-                <p className="text-lg">work@arqviz.com</p>
+                {/* <Mail className="w-6 h-6 text-black" />
+                <p className="text-md">work@arqviz.com</p> */}
               </motion.div>
             </div>
             <div className="mt-12">
-              <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
+              <h3 className="text-lg font-bold mb-4">Follow Us</h3>
               <div className="flex flex-col items-start space-y-4">
                 <a href="https://www.instagram.com/arqviz/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-lg hover:text-blue-500 transition-colors duration-300">
-                  <img src={instagram} alt="Instagram" className="w-8 h-8" />
+                  <img src={instagram} alt="Instagram" className="w-6 h-6" />
                   <p>Instagram</p>
                 </a>
-                <a href="https://www.youtube.com/arqviz" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-lg hover:text-red-500 transition-colors duration-300">
-                  <img src={youtube} alt="YouTube" className="w-8 h-8" />
+                <a href="https://www.youtube.com/@Arqviz3D-India" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 text-lg hover:text-red-500 transition-colors duration-300">
+                  <img src={youtube} alt="YouTube" className="w-6 h-6" />
                   <p>YouTube</p>
                 </a>
               </div>
