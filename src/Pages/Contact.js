@@ -4,6 +4,9 @@ import { MapPin, Phone, Mail, Send } from 'lucide-react'
 import '../Assets/instagram.png'
 import '../Assets/youtube.png'
 
+// Import Firebase configuration and Firestore
+import { db } from '../firebaseConfig' // Adjust the path to your Firebase config
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
 const ContactPage = () => {
   const [name, setName] = useState('')
@@ -15,18 +18,32 @@ const ContactPage = () => {
   const instagram = require('../Assets/instagram.png');
   const youtube = require('../Assets/youtube.png');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Simulating form submission
-    setTimeout(() => {
+    
+    try {
+      // Save form data to Firestore
+      await addDoc(collection(db, 'contact_submissions'), {
+        name,
+        email,
+        message,
+        timestamp: serverTimestamp()
+      })
+
+      // Reset form and show success message
       setIsSubmitting(false)
       setSubmitMessage('Thank you for your message. We\'ll be in touch soon!')
       setName('')
       setEmail('')
       setMessage('')
-    }, 2000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setIsSubmitting(false)
+      setSubmitMessage('Sorry, there was an error. Please try again.')
+    }
   }
+
 
   useEffect(() => {
     if (submitMessage) {

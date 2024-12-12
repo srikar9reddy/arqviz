@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { doc, getDoc } from 'firebase/firestore'
+import { 
+  doc, 
+  getDoc, 
+  collection, 
+  query, 
+  orderBy, 
+  startAfter, 
+  limit, 
+  getDocs 
+} from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
@@ -23,23 +32,54 @@ const ProjectDetails = () => {
   const [project, setProject] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [adjacentProjects, setAdjacentProjects] = useState({
+    previous: null,
+    next: null
+  })
 
   useEffect(() => {
-    const fetchProject = async () => {
+    const fetchProjectAndAdjacentProjects = async () => {
       try {
+        // Fetch current project
         const projectDoc = await getDoc(doc(db, 'projects', id))
+        
         if (projectDoc.exists()) {
-          setProject({
+          const projectData = {
             id: projectDoc.id,
             ...projectDoc.data(),
-            // Use thumbnailUrl as featureImage if available
             featureImage: projectDoc.data().featureImageUrl || 
                          projectDoc.data().thumbnailUrl || 
                          (projectDoc.data().images && projectDoc.data().images.length > 0 
                            ? projectDoc.data().images[0] 
                            : null),
-            // Use imageUrls as images array
             images: projectDoc.data().imageUrls || []
+          }
+          setProject(projectData)
+
+          // Fetch adjacent projects
+          const projectsRef = collection(db, 'projects')
+          
+          // Query for previous project (projects with a lower/earlier id)
+          const prevQuery = query(
+            projectsRef, 
+            orderBy('createdAt', 'desc'), 
+            startAfter(projectDoc), 
+            limit(1)
+          )
+          const prevSnapshot = await getDocs(prevQuery)
+          
+          // Query for next project (projects with a higher/later id)
+          const nextQuery = query(
+            projectsRef, 
+            orderBy('createdAt', 'asc'), 
+            startAfter(projectDoc), 
+            limit(1)
+          )
+          const nextSnapshot = await getDocs(nextQuery)
+
+          setAdjacentProjects({
+            previous: !prevSnapshot.empty ? prevSnapshot.docs[0].id : null,
+            next: !nextSnapshot.empty ? nextSnapshot.docs[0].id : null
           })
         } else {
           setError('Project not found')
@@ -52,9 +92,10 @@ const ProjectDetails = () => {
       }
     }
 
-    fetchProject()
+    fetchProjectAndAdjacentProjects()
   }, [id])
 
+  
   // Add keyboard event handler
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -113,6 +154,19 @@ const ProjectDetails = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.images.length) % project.images.length)
   }
 
+  const navigateToPreviousProject = (e) => {
+    e.preventDefault()
+    if (adjacentProjects.previous) {
+      navigate(`/project/${adjacentProjects.previous}`)
+    }
+  }
+
+  const navigateToNextProject = (e) => {
+    e.preventDefault()
+    if (adjacentProjects.next) {
+      navigate(`/project/${adjacentProjects.next}`)
+    }
+  }
   return (
     <div className="min-h-screen bg-white text-black mt-20">
       <Header />
@@ -263,18 +317,33 @@ const ProjectDetails = () => {
       </main>
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="mt-12 flex justify-between p-10 md:p-20"
-      >
-        <a href="/projects/previous" className="text-gray-600 hover:text-black transition-colors duration-300">
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.8 }}
+      className="mt-12 flex justify-between p-10 md:p-20"
+    >
+      {adjacentProjects.previous ? (
+        <button 
+          onClick={navigateToPreviousProject} 
+          className="text-gray-600 hover:text-black transition-colors duration-300"
+        >
           ← Previous Project
-        </a>
-        <a href="/projects/next" className="text-gray-600 hover:text-black transition-colors duration-300">
+        </button>
+      ) : (
+        <div className="text-gray-300">No Previous Project</div>
+      )}
+      
+      {adjacentProjects.next ? (
+        <button 
+          onClick={navigateToNextProject} 
+          className="text-gray-600 hover:text-black transition-colors duration-300"
+        >
           Next Project →
-        </a>
-      </motion.div>
+        </button>
+      ) : (
+        <div className="text-gray-300">No Next Project</div>
+      )}
+    </motion.div>
       <Footer/>
     </div>
   )
